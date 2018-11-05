@@ -1,0 +1,73 @@
+{
+  "exp": {
+    "name": "test"
+  },
+  "model":{
+    "name": "model.LMModel",
+    "CNN_window_size": 50,
+    "dense_units":{
+      "DenseLayer1": 128,
+      "DenseLayer2": 128
+    },
+    "dimensionality":{
+      "Layer1": 20,
+      "Layer2": 50
+    },
+    "dropout_probability": 0.56893,
+    "initial_lr": 1e-4,
+    "input_shape": [32, 50, 1],
+    "kernel_size":{
+      "Layer1": 10,
+      "Layer2": 20
+    },
+    "learning_rate": 0.001,
+    "num_gpus": 1,
+    "num_LSTM_units": 100,
+    "num_time_steps": 32,
+    "optimizer": "adam",
+    "padding":{
+      "Layer1": "same",
+      "Layer2": "valid"
+    },
+    "scale_l2_regularization": 0.29586,
+    "stride":{
+      "Layer1": 1,
+      "Layer2": 1
+    }
+  },
+  "trainer":{
+    "name": "trainer.trainGenerator",
+    "num_epochs": 100,
+    "batch_size": 64,
+    "validation_split":0.25,
+    "verbose_training": true,
+    "num_workers": 8,
+    "use_multiprocessing": true,
+    "max_queue_size": 512,
+    "class_weight": {"0": 1, "1": 5}
+  },
+  "callbacks":{
+    "checkpoint_monitor": "val_loss",
+    "checkpoint_mode": "min",
+    "checkpoint_save_best_only": true,
+    "checkpoint_save_weights_only": true,
+    "checkpoint_verbose": true,
+    "earlystopping_monitor": "val_loss",
+    "earlystopping_patience": 10,
+    "earlystopping_verbose": true,
+    "learningrate_decay_rate": 0.96,
+    "learningrate_decay_epochs": 15,
+    "tensorboard_write_graph": true
+  },
+  "data_loader":{
+    "name": "dataset.Dataset",
+    "batch_size":{
+    "train": 64,
+    "eval": 64,
+    "test": 64
+    },
+    "data_dir": "./data/processed/h5",
+    "data_format": "channels_last",
+    "df_file": "./data/processed/subject_overview.csv"
+  }
+}
